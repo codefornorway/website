@@ -18,6 +18,8 @@ onMounted(async () => {
 
 <template>
   <section class="p-6 max-w-5xl mx-auto">
+    <NuxtLink to="/" class="text-blue-500 underline mb-6 block">← Back to Home</NuxtLink>
+
     <h1 class="text-3xl font-bold mb-6">GitHub Projects</h1>
 
     <!-- Loading State -->
