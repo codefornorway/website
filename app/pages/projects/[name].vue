@@ -33,19 +33,15 @@ onMounted(async () => {
 <template>
   <section class="p-6 max-w-3xl mx-auto">
     <NuxtLink to="/" class="text-blue-500 underline mb-6 block">← Back to Home</NuxtLink>
-    <NuxtLink to="/projects" class="text-blue-500 underline mb-6 block">← Back to Projects</NuxtLink>
 
-    <!-- Loading -->
     <div v-if="loading" class="space-y-4">
       <div class="h-10 bg-gray-100 rounded animate-pulse w-1/2"></div>
       <div class="h-6 bg-gray-100 rounded animate-pulse w-full"></div>
       <div class="h-4 bg-gray-100 rounded animate-pulse w-1/4"></div>
     </div>
 
-    <!-- Hata -->
     <div v-else-if="error" class="text-red-500">⚠️ {{ error.message || 'Error loading repository.' }}</div>
 
-    <!-- Veri -->
     <div v-else>
       <h1 class="text-3xl font-bold">{{ repo.name }}</h1>
       <p class="text-gray-700 mt-2">{{ repo.description || 'No description available.' }}</p>
@@ -56,7 +52,6 @@ onMounted(async () => {
 
       <a :href="repo.html_url" target="_blank" class="text-blue-600 underline mt-4 block">View on GitHub →</a>
 
-      <!-- Contributors -->
       <div class="mt-8">
         <h2 class="text-xl font-semibold mb-4">Contributors</h2>
 
@@ -81,18 +76,3 @@ onMounted(async () => {
     </div>
   </section>
 </template>
-
-<style scoped>
-.animate-pulse {
-  animation: pulse 1.5s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-</style>
