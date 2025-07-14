@@ -1,5 +1,3 @@
-// composables/useGithub.ts
-
 export function useGithub() {
   const fetchRepos = async () => {
     return await $fetch('/api/github/repos');

@@ -1,15 +1,7 @@
-// server/api/github/repos.get.ts
 import { octokit } from '~~/server/utils/github';
-import { defineEventHandler, createError, getQuery, setResponseHeader } from 'h3';
+import { defineEventHandler, createError } from 'h3';
 
-export default defineEventHandler(async event => {
-  const cached = await useStorage().getItem('github:repos');
-
-  if (cached) {
-    setResponseHeader(event, 'x-cache', 'HIT');
-    return cached;
-  }
-
+export default defineEventHandler(async () => {
   try {
     const org = process.env.GITHUB_ORG || 'codefornorway';
     const { data } = await octokit.repos.listForOrg({
@@ -18,7 +10,7 @@ export default defineEventHandler(async event => {
       per_page: 100,
     });
 
-    const repos = data.map(repo => ({
+    return data.map(repo => ({
       id: repo.id,
       name: repo.name,
       full_name: repo.full_name,
@@ -29,13 +21,6 @@ export default defineEventHandler(async event => {
       created_at: repo.created_at,
       updated_at: repo.updated_at,
     }));
-
-    // sunucu tarafı cache (5 dakika)
-    await useStorage().setItem('github:repos', repos);
-    setTimeout(() => useStorage().removeItem('github:repos'), 1000 * 60 * 5); // 5 dakika
-
-    setResponseHeader(event, 'x-cache', 'MISS');
-    return repos;
   } catch (error: any) {
     console.error('[GitHub Repo Error]', error);
     throw createError({

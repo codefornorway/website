@@ -1,4 +1,3 @@
-// server/api/github/repos/[name]/contributors.get.ts
 import { defineEventHandler, createError } from 'h3';
 import { octokit } from '~~/server/utils/github';
 
