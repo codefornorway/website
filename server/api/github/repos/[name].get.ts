@@ -1,35 +1,28 @@
-import { defineEventHandler, createError } from 'h3';
 import { octokit } from '~~/server/utils/github';
 
 export default defineEventHandler(async event => {
-  const org = process.env.GITHUB_ORG || 'codefornorway';
   const name = event.context.params?.name;
 
   if (!name) {
     throw createError({ statusCode: 400, message: 'Repository name is required' });
   }
 
-  try {
-    const { data } = await octokit.repos.get({
-      owner: org,
+  return octokit.repos
+    .get({
+      owner: process.env.GITHUB_ORG as string,
       repo: name,
+    })
+    .then(response => {
+      return {
+        id: response.data.id,
+        name: response.data.name,
+        full_name: response.data.full_name,
+        html_url: response.data.html_url,
+        description: response.data.description,
+        stargazers_count: response.data.stargazers_count,
+        forks_count: response.data.forks_count,
+        created_at: response.data.created_at,
+        updated_at: response.data.updated_at,
+      };
     });
-
-    return {
-      id: data.id,
-      name: data.name,
-      full_name: data.full_name,
-      html_url: data.html_url,
-      description: data.description,
-      stargazers_count: data.stargazers_count,
-      forks_count: data.forks_count,
-      created_at: data.created_at,
-      updated_at: data.updated_at,
-    };
-  } catch (error: any) {
-    throw createError({
-      statusCode: 404,
-      message: 'Repository not found',
-    });
-  }
 });

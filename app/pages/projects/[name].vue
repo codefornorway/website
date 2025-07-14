@@ -32,6 +32,7 @@ onMounted(async () => {
 
 <template>
   <section class="p-6 max-w-3xl mx-auto">
+    <NuxtLink to="/" class="text-blue-500 underline mb-6 block">← Back to Home</NuxtLink>
     <NuxtLink to="/projects" class="text-blue-500 underline mb-6 block">← Back to Projects</NuxtLink>
 
     <!-- Loading -->
