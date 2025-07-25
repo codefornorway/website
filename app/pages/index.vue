@@ -49,7 +49,7 @@ onMounted(async () => {
 
     <!-- Members -->
     <section class="max-w-3xl mx-auto px-4 py-10">
-      <h2 class="text-2xl font-semibold mb-6 text-center">Organization Members</h2>
+      <h2 class="text-2xl font-semibold mb-6 text-center">Members</h2>
       <div v-if="loading" class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div v-for="n in 8" :key="n" class="h-24 bg-gray-100 rounded-full animate-pulse" />
       </div>
@@ -82,8 +82,11 @@ onMounted(async () => {
 
     <!-- Support CTA -->
     <section class="max-w-2xl mx-auto px-4 py-10 text-center">
-      <h2 class="text-2xl font-semibold mb-4">Support Code for Norway</h2>
-      <p class="text-gray-700 mb-6">Your support helps us build civic tech for a better Norway.</p>
+      <h2 class="text-2xl font-semibold mb-4">Donate to Code for Norway</h2>
+      <p class="text-gray-700 mb-6">
+        In support of the development and launch of enterprise software products with Government and nonprofit partners, we are standardizing our infrastructure and procedures.
+        This enables Code for Norway to provide world-class training to our members and valuable, scalable, impactful products to the community.
+      </p>
       <a href="https://github.com/sponsors/zackha" target="_blank" class="inline-block px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
         Donate via GitHub Sponsors
       </a>
