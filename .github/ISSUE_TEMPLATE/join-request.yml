@@ -1,0 +1,48 @@
+name: 🙋 Join the Organization
+description: Fill this out to request to join our organization!
+title: "Request to join the organization"
+labels: [join-request]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        👋 Hi! Thank you for your interest in joining our organization. Please answer the questions below.
+
+  - type: input
+    id: name
+    attributes:
+      label: Your Full Name
+      placeholder: e.g. Jane Doe
+    validations:
+      required: true
+
+  - type: input
+    id: github
+    attributes:
+      label: Your GitHub Username
+      placeholder: e.g. janedoe
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: skills
+    attributes:
+      label: What are your skills?
+      options:
+        - label: Frontend (Vue / React / HTML / CSS)
+        - label: Backend (Node / Python / Go)
+        - label: Mobile (React Native / Flutter)
+        - label: DevOps (CI/CD / Docker / AWS)
+        - label: UI/UX Design
+        - label: Project Management
+        - label: Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Why do you want to join?
+      placeholder: Tell us a bit about your motivation...
+    validations:
+      required: true
