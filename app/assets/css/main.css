@@ -4,3 +4,11 @@
 @theme static {
   --font-sans: 'Roboto', sans-serif;
 }
+
+.project-card {
+  @apply bg-[#e5f1fa] border-6 flex border-transparent p-4 hover:border-[#50a2ff] transition-shadow duration-200 cursor-pointer;
+}
+
+.members-card {
+  @apply border-2 border-gray-300 rounded-lg p-4 transition-shadow duration-200;
+}
