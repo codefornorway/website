@@ -43,7 +43,7 @@ onMounted(async () => {
     <div v-else-if="error" class="text-red-500">⚠️ {{ error.message || 'Error loading repository.' }}</div>
 
     <div v-else>
-      <h1 class="text-3xl font-bold">{{ repo.name }}</h1>
+      <h1 class="text-3xl font-bold">{{ formatRepoName(repo.name) }}</h1>
       <p class="text-gray-700 mt-2">{{ repo.description || 'No description available.' }}</p>
 
       <div class="text-sm text-gray-600 mt-4">
