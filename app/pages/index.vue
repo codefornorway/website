@@ -7,6 +7,14 @@ if (repos?.error.value) {
 if (members?.error.value) {
   throw createError({ statusCode: 500, statusMessage: 'Could not load members' });
 }
+
+const donors = [
+  {
+    name: 'UDI',
+    url: 'https://udi.no',
+    logo: 'https://media.snl.no/media/192735/standard_udi.png',
+  },
+];
 </script>
 
 <template>
@@ -74,11 +82,44 @@ if (members?.error.value) {
             target="_blank"
             href="https://github.com/sponsors/zackha"
             rel="noopener noreferrer"
-            class="group inline-flex items-center justify-between gap-4 px-6 py-4 text-[1.063rem] font-normal leading-[1.35] transition-colors duration-200 bg-gray-600 text-white hover:bg-blue-700 focus:bg-blue-700">
+            class="group inline-flex items-center justify-between gap-4 px-6 py-4 text-[1.063rem] font-normal leading-[1.35] bg-gray-600 text-white hover:bg-blue-700 focus:bg-blue-700">
             Donate via GitHub Sponsors
-            <RightArrow class="transition-colors text-yellow-400 w-6 group-hover:text-white group-focus:text-white" />
+            <RightArrow class="text-yellow-400 w-6 group-hover:text-white group-focus:text-white" />
           </a>
         </div>
+      </div>
+    </section>
+
+    <!-- Join Us Section -->
+    <section class="bg-[#e5e9f0] p-8 mb-12">
+      <h2 class="text-3xl font-medium text-[#212a3b] mb-3">Join Us</h2>
+      <p class="text-gray-700 text-lg mb-6">
+        We welcome volunteer developers to join our mission. Thanks to the generous support of our donors, we provide stipends to our contributors so they can focus on building
+        impactful solutions for communities in Norway.
+      </p>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://github.com/codefornorway/website/issues/new?template=join-request.yml"
+        class="group inline-flex items-center justify-between gap-4 px-6 py-4 text-[1.063rem] font-normal leading-[1.35] bg-gray-600 text-white hover:bg-blue-700 focus:bg-blue-700">
+        Become a Volunteer
+        <RightArrow class="text-yellow-400 w-6 group-hover:text-white group-focus:text-white" />
+      </a>
+    </section>
+
+    <!-- Donors Section with Logos -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-medium text-gray-900 mb-6">Our Donors</h2>
+      <div class="flex flex-wrap gap-8 items-center">
+        <a
+          v-for="donor in donors"
+          :key="donor.name"
+          :href="donor.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex flex-col items-center w-40 hover:scale-105 transition-transform">
+          <img :src="donor.logo" :alt="donor.name" class="h-32 object-contain mb-3" />
+        </a>
       </div>
     </section>
   </div>
