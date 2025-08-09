@@ -8,11 +8,21 @@ if (members?.error.value) {
   throw createError({ statusCode: 500, statusMessage: 'Could not load members' });
 }
 
-const donors = [
+const sponsors = [
   {
     name: 'UDI',
     url: 'https://udi.no',
-    logo: 'https://media.snl.no/media/192735/standard_udi.png',
+    logo: 'https://www.udi.no/Resources/Internal/img/udi_logo_text.jpg',
+  },
+  {
+    name: 'Hero Mottak',
+    url: 'https://heromottak.no',
+    logo: 'https://heromottak.no/media/23nfclru/logo_hero_mottak_rgb.jpg',
+  },
+  {
+    name: 'Vadsø kommune',
+    url: 'https://vadso.kommune.no/',
+    logo: 'https://www.vadso.kommune.no/design/vadso_kommune/vadso/v2017/assets/images/vadso-logo.svg',
   },
 ];
 </script>
@@ -94,7 +104,7 @@ const donors = [
     <section class="bg-[#e5e9f0] p-8 mb-12">
       <h2 class="text-3xl font-medium text-[#212a3b] mb-3">Join Us</h2>
       <p class="text-gray-700 text-lg mb-6">
-        We welcome volunteer developers to join our mission. Thanks to the generous support of our donors, we provide stipends to our contributors so they can focus on building
+        We welcome volunteer developers to join our mission. Thanks to the generous support of our sponsors, we provide stipends to our contributors so they can focus on building
         impactful solutions for communities in Norway.
       </p>
       <a
@@ -107,20 +117,15 @@ const donors = [
       </a>
     </section>
 
-    <!-- Donors Section with Logos -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-medium text-gray-900 mb-6">Our Donors</h2>
-      <div class="flex flex-wrap gap-8 items-center">
-        <a
-          v-for="donor in donors"
-          :key="donor.name"
-          :href="donor.url"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex flex-col items-center w-40 hover:scale-105 transition-transform">
-          <img :src="donor.logo" :alt="donor.name" class="h-32 object-contain mb-3" />
+    <!-- Sponsors Section with Logos
+    <section class="flex flex-col items-center justify-center mt-28">
+      <h2 class="text-2xl font-medium text-gray-900 mb-6">Our Sponsors</h2>
+      <div class="flex gap-20 items-center">
+        <a v-for="sponsor in sponsors" :key="sponsor.name" :href="sponsor.url" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center w-48">
+          <img :src="sponsor.logo" :alt="sponsor.name" />
         </a>
       </div>
     </section>
+     -->
   </div>
 </template>
