@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const url = useRequestURL();
+
 useHead({
   htmlAttrs: { lang: 'en' },
   link: [
@@ -15,10 +17,10 @@ useSeoMeta({
   ogDescription: 'Independent civic technology initiative advancing public digital infrastructure through open collaboration, engineering excellence, and community participation.',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   twitterCard: 'summary_large_image',
-  ogImage: '/social-card.png',
-  twitterImage: '/social-card.png',
+  ogImage: `${url.origin}/social-card.png`,
+  twitterImage: `${url.origin}/social-card.png`,
   ogType: 'website',
-  ogUrl: 'https://codefornorway.org',
+  ogUrl: url.origin,
   ogSiteName: 'Code for Norway',
   robots: 'index, follow',
   keywords:
