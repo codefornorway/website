@@ -1,11 +1,18 @@
 import { Octokit } from '@octokit/rest';
 
-const token = process.env.GITHUB_TOKEN;
+export function createGithubClient() {
+  const { githubToken } = useRuntimeConfig();
 
-if (!token) {
-  throw new Error('GITHUB_TOKEN is missing in environment variables');
+  if (!githubToken) {
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'GitHub API token is missing in runtime config.',
+    });
+  }
+
+  return new Octokit({
+    auth: githubToken,
+  });
 }
 
-export const octokit = new Octokit({
-  auth: token,
-});
+export const octokit = createGithubClient();
