@@ -6,11 +6,11 @@ defineProps(['repos']);
   <footer class="bg-[#2d2926] text-white mt-32">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
       <div class="grid grid-cols-1 md:grid-cols-3">
-        <div class="flex h-14 items-center space-x-4 mb-10">
+        <NuxtLink to="/" class="flex h-14 items-center space-x-4 mb-10">
           <LogoIcon class="h-full text-white" />
           <div class="h-full w-px bg-white" />
           <span class="text-4xl tracking-tight text-white font-extralight">Code for Norge</span>
-        </div>
+        </NuxtLink>
 
         <div class="mb-10">
           <h3 class="text-2xl mb-5">Our Projects</h3>
