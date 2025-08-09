@@ -1,22 +1,15 @@
-<script setup>
-const repos = ref([]);
-const members = ref([]);
-const loading = ref(true);
-const error = ref(null);
+<script setup lang="ts">
+import type { OrganizationRepo, OrganizationMember } from '~~/types';
 
-const { fetchRepos, fetchMembers } = useGithub();
+const { data: repos, error: reposError } = await useFetch<OrganizationRepo[]>('/api/github/repos');
+const { data: members, error: membersError } = await useFetch<OrganizationMember[]>('/api/github/members');
 
-onMounted(async () => {
-  try {
-    const [repoData, memberData] = await Promise.all([fetchRepos(), fetchMembers()]);
-    repos.value = repoData;
-    members.value = memberData;
-  } catch (err) {
-    error.value = err;
-  } finally {
-    loading.value = false;
-  }
-});
+if (!repos.value || reposError.value) {
+  throw createError({ statusCode: 500, statusMessage: 'Could not load repositories' });
+}
+if (!members.value || membersError.value) {
+  throw createError({ statusCode: 500, statusMessage: 'Could not load members' });
+}
 </script>
 
 <template>
@@ -25,11 +18,9 @@ onMounted(async () => {
       <h2 class="text-[2rem] font-bold text-[#2d2926] mt-6 mb-4">Our Projects</h2>
 
       <div class="grid gap-4 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        <template v-if="loading">
+        <template v-if="!repos">
           <div v-for="n in 3" :key="n" class="project-card h-48 animate-pulse" />
         </template>
-
-        <div v-else-if="error" class="text-red-600 text-center">⚠️ Failed to load repositories.</div>
 
         <template v-else>
           <ProjectCard v-for="repo in repos" :key="repo.id" :repo="repo" />
@@ -41,11 +32,9 @@ onMounted(async () => {
       <h2 class="text-2xl font-medium text-gray-900 mb-6">Members</h2>
 
       <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center">
-        <template v-if="loading">
+        <template v-if="!members">
           <div v-for="n in 2" :key="n" class="bg-gray-200 rounded-lg h-40 animate-pulse" />
         </template>
-
-        <div v-else-if="error" class="text-red-600 text-center">⚠️ Failed to load members.</div>
 
         <template v-else>
           <MemberCard v-for="member in members" :key="member.login" :member="member" />

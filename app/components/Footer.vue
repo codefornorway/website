@@ -1,5 +1,7 @@
 <script setup lang="ts">
-defineProps(['repos']);
+import type { OrganizationRepo } from '~~/types';
+
+const { data: repos } = await useFetch<OrganizationRepo[]>('/api/github/repos');
 </script>
 
 <template>
