@@ -1,15 +1,6 @@
 <script setup lang="ts">
 const route = useRoute();
-const repoName = route.params.name as string;
-
-const { repo, contributors } = useGithub(repoName);
-
-if (repo?.error.value) {
-  throw createError({ statusCode: 500, statusMessage: 'Could not load repository' });
-}
-if (contributors?.error.value) {
-  throw createError({ statusCode: 500, statusMessage: 'Could not load contributors' });
-}
+const { repo, contributors } = useGithub(route.params.name as string);
 </script>
 
 <template>

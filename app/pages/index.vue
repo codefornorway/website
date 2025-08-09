@@ -1,13 +1,6 @@
 <script setup lang="ts">
 const { repos, members } = useGithub();
 
-if (repos?.error.value) {
-  throw createError({ statusCode: 500, statusMessage: 'Could not load repositories' });
-}
-if (members?.error.value) {
-  throw createError({ statusCode: 500, statusMessage: 'Could not load members' });
-}
-
 const donors = [
   {
     name: 'UDI',
@@ -24,16 +17,12 @@ const donors = [
       <h2 class="text-[2rem] font-bold text-[#2d2926] mt-6 mb-4">Our Projects</h2>
 
       <div class="grid gap-4 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        <template v-if="repos?.pending.value">
+        <template v-if="!repos">
           <div v-for="n in 3" :key="n" class="project-card h-48 animate-pulse" />
         </template>
 
-        <template v-else-if="repos?.data.value?.length">
-          <ProjectCard v-for="repo in repos.data.value" :key="repo.id" :repo="repo" />
-        </template>
-
         <template v-else>
-          <p class="text-gray-500">No repositories found.</p>
+          <ProjectCard v-for="repo in repos.data.value" :key="repo.id" :repo="repo" />
         </template>
       </div>
     </section>
@@ -43,16 +32,12 @@ const donors = [
       <h2 class="text-2xl font-medium text-gray-900 mb-6">Members</h2>
 
       <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center">
-        <template v-if="members?.pending.value">
+        <template v-if="!members">
           <div v-for="n in 2" :key="n" class="bg-gray-200 rounded-lg h-40 animate-pulse" />
         </template>
 
-        <template v-else-if="members?.data.value?.length">
-          <MemberCard v-for="member in members.data.value" :key="member.login" :member="member" />
-        </template>
-
         <template v-else>
-          <p class="text-gray-500">No members found.</p>
+          <MemberCard v-for="member in members.data.value" :key="member.login" :member="member" />
         </template>
       </div>
     </section>
