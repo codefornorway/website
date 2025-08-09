@@ -5,7 +5,7 @@ const projectList = computed(() => repos?.data.value ?? []);
 </script>
 
 <template>
-  <footer class="bg-[#2d2926] text-white mt-32">
+  <footer class="bg-[#2d2926] text-white mt-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
       <div class="grid grid-cols-1 md:grid-cols-3">
         <!-- Logo -->

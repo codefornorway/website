@@ -2,15 +2,15 @@ import type { OrganizationRepo, OrganizationMember, RepositoryContributor } from
 
 export function useGithub(repoName?: string) {
   const base = useRuntimeConfig().public.githubApiBase;
-  const fetcher = <T>(path: string) => useFetch<T>(`${base}${path}`);
+  const fetcher = <T>(path: string) => $fetch<T>(`${base}${path}`);
 
   return {
-    repos: !repoName ? fetcher<OrganizationRepo[]>('/repos') : null,
+    repos: !repoName ? useAsyncData<OrganizationRepo[]>('org-repos', () => fetcher('/repos')) : null,
 
-    members: !repoName ? fetcher<OrganizationMember[]>('/members') : null,
+    members: !repoName ? useAsyncData<OrganizationMember[]>('org-members', () => fetcher('/members')) : null,
 
-    repo: repoName ? fetcher<OrganizationRepo>(`/repos/${repoName}`) : null,
+    repo: repoName ? useAsyncData<OrganizationRepo>(`repo-${repoName}`, () => fetcher(`/repos/${repoName}`)) : null,
 
-    contributors: repoName ? fetcher<RepositoryContributor[]>(`/repos/${repoName}/contributors`) : null,
+    contributors: repoName ? useAsyncData<RepositoryContributor[]>(`contributors-${repoName}`, () => fetcher(`/repos/${repoName}/contributors`)) : null,
   };
 }
