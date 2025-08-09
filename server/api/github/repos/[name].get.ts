@@ -3,30 +3,49 @@ import { octokit } from '~~/server/utils/github';
 
 export default defineCachedEventHandler(
   async event => {
+    const config = useRuntimeConfig();
     const name = event.context.params?.name;
 
     if (!name) {
-      throw createError({ statusCode: 400, message: 'Repository name is required' });
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Repository name is required',
+      });
     }
 
-    const response = await octokit.repos.get({
-      owner: process.env.GITHUB_ORG as string,
-      repo: name,
-    });
+    if (!config.githubOrg) {
+      throw createError({
+        statusCode: 500,
+        statusMessage: 'GitHub organization name is missing in runtime config.',
+      });
+    }
 
-    const repo: OrganizationRepo = {
-      id: response.data.id,
-      name: response.data.name,
-      full_name: response.data.full_name,
-      html_url: response.data.html_url,
-      description: response.data.description,
-      stargazers_count: response.data.stargazers_count,
-      forks_count: response.data.forks_count,
-      created_at: response.data.created_at,
-      updated_at: response.data.updated_at,
-    };
-
-    return repo;
+    return octokit.repos
+      .get({
+        owner: config.githubOrg,
+        repo: name,
+      })
+      .then(({ data }) => {
+        const repo: OrganizationRepo = {
+          id: data.id,
+          name: data.name,
+          full_name: data.full_name,
+          html_url: data.html_url,
+          description: data.description,
+          stargazers_count: data.stargazers_count ?? 0,
+          forks_count: data.forks_count ?? 0,
+          created_at: data.created_at ?? '',
+          updated_at: data.updated_at ?? '',
+        };
+        return repo;
+      })
+      .catch(err => {
+        console.error(`Error fetching GitHub repo "${name}":`, err);
+        throw createError({
+          statusCode: 500,
+          statusMessage: `Failed to fetch repository "${name}".`,
+        });
+      });
   },
   {
     group: 'api',

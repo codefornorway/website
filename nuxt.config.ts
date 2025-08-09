@@ -7,4 +7,11 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  runtimeConfig: {
+    githubToken: process.env.GITHUB_TOKEN, // private
+    githubOrg: process.env.GITHUB_ORG, // private
+    public: {
+      githubApiBase: '/api/github',
+    },
+  },
 });

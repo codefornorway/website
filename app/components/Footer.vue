@@ -1,29 +1,37 @@
 <script setup lang="ts">
-import type { OrganizationRepo } from '~~/types';
+const { repos } = useGithub();
 
-const { data: repos } = await useFetch<OrganizationRepo[]>('/api/github/repos');
+const projectList = computed(() => repos?.data.value ?? []);
 </script>
 
 <template>
   <footer class="bg-[#2d2926] text-white mt-32">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
       <div class="grid grid-cols-1 md:grid-cols-3">
+        <!-- Logo -->
         <NuxtLink to="/" class="flex h-14 items-center space-x-4 mb-10">
           <LogoIcon class="h-full text-white" />
           <div class="h-full w-px bg-white" />
           <span class="text-4xl tracking-tight text-white font-extralight">Code for Norge</span>
         </NuxtLink>
 
+        <!-- Projects -->
         <div class="mb-10">
           <h3 class="text-2xl mb-5">Our Projects</h3>
           <div class="h-px bg-[#5f5d5c] mb-5"></div>
-          <ul class="space-y-4">
-            <li v-for="repo in repos" :key="repo.id">
-              <NuxtLink :to="`/projects/${repo.name}`" class="hover:text-blue-400">{{ formatRepoName(repo.name) }}</NuxtLink>
+
+          <ul v-if="projectList.length" class="space-y-4">
+            <li v-for="repo in projectList" :key="repo.id">
+              <NuxtLink :to="`/projects/${repo.name}`" class="hover:text-blue-400">
+                {{ formatRepoName(repo.name) }}
+              </NuxtLink>
             </li>
           </ul>
+
+          <p v-else class="text-sm text-gray-400">No projects available.</p>
         </div>
 
+        <!-- Links -->
         <div>
           <h3 class="text-2xl mb-5">codefornorway.org</h3>
           <div class="h-px bg-[#5f5d5c] mb-5"></div>
