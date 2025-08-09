@@ -22,7 +22,9 @@ useSeoMeta({
   ogType: 'website',
   ogUrl: url.origin,
   ogSiteName: 'Code for Norway',
-  robots: 'index, follow',
+  keywords:
+    'civic tech, open source, public infrastructure, digital public services, Norway, nonprofit technology, participatory development, code for norway, GIS, nuxt, supabase, help map, work for norway',
+});
 </script>
 
 <template>
