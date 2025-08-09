@@ -31,8 +31,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="p-6 max-w-3xl mx-auto">
-    <NuxtLink to="/" class="text-blue-500 underline mb-6 block">← Back to Home</NuxtLink>
+  <section class="mx-auto px-4 mt-2 sm:px-6 xl:px-24 max-w-[1440px]">
+    <NuxtLink to="/" class="text-[#0072ce] underline font-light mb-8 block">Home</NuxtLink>
 
     <div v-if="loading" class="space-y-4">
       <div class="h-10 bg-gray-100 rounded animate-pulse w-1/2"></div>
@@ -42,9 +42,9 @@ onMounted(async () => {
 
     <div v-else-if="error" class="text-red-500">⚠️ {{ error.message || 'Error loading repository.' }}</div>
 
-    <div v-else>
-      <h1 class="text-3xl font-bold">{{ formatRepoName(repo.name) }}</h1>
-      <p class="text-gray-700 mt-2">{{ repo.description || 'No description available.' }}</p>
+    <div v-else class="max-w-lg">
+      <h1 class="text-4xl font-bold tracking-wide">{{ formatRepoName(repo.name) }}</h1>
+      <p class="text-[#2d2926] mt-4 tracking-wide font-light text-2xl">{{ repo.description || 'No description available.' }}</p>
 
       <div class="text-sm text-gray-600 mt-4">
         ⭐ {{ repo.stargazers_count }} stars | 🍴 {{ repo.forks_count }} forks | 📅 Created: {{ new Date(repo.created_at).toLocaleDateString() }}
