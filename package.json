@@ -1,7 +1,28 @@
 {
-  "name": "nuxt-app",
-  "private": true,
+  "name": "codefornorway-website",
+  "version": "1.2.5",
+  "description": "Official website for Code for Norway, showcasing community-driven open-source projects for social good",
+  "author": "Code for Norway <hey@codefornorway.org>",
+  "license": "MIT",
+  "private": false,
   "type": "module",
+  "homepage": "https://github.com/codefornorway/website",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codefornorway/website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/codefornorway/website/issues"
+  },
+  "keywords": [
+    "nuxt",
+    "vue",
+    "tailwindcss",
+    "open-source",
+    "community",
+    "norway",
+    "octokit"
+  ],
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
