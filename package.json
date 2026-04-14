@@ -1,6 +1,6 @@
 {
   "name": "codefornorway-website",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "Official website for Code for Norway, showcasing community-driven open-source projects for social good",
   "author": "Code for Norway <hey@codefornorway.org>",
   "license": "MIT",
@@ -31,12 +31,12 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@octokit/rest": "^22.0.0",
-    "@tailwindcss/vite": "^4.1.11",
-    "nuxt": "^4.0.3",
-    "tailwindcss": "^4.1.11",
-    "vue": "^3.5.18",
-    "vue-router": "^4.5.1"
+    "@octokit/rest": "^22.0.1",
+    "@tailwindcss/vite": "^4.2.2",
+    "nuxt": "^4.4.2",
+    "tailwindcss": "^4.2.2",
+    "vue": "^3.5.32",
+    "vue-router": "^5.0.4"
   },
   "packageManager": "pnpm@10.14.0"
 }
