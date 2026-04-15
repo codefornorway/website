@@ -5,7 +5,9 @@
       <NuxtLink to="/" class="flex items-center space-x-4">
         <LogoIcon class="h-14" />
         <div class="h-14 w-px bg-black" />
-        <span class="text-4xl tracking-tight text-black font-extralight">Code for Norge</span>
+        <span class="text-4xl tracking-tight text-black font-extralight"
+          >Code for Norge</span
+        >
       </NuxtLink>
       <div></div>
     </div>

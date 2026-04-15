@@ -1,17 +1,17 @@
-import tailwindcss from '@tailwindcss/vite';
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
-  compatibilityDate: '2025-05-15',
+  compatibilityDate: "2025-05-15",
   devtools: { enabled: true },
-  css: ['@/assets/css/main.css'],
+  css: ["@/assets/css/main.css"],
   vite: {
     plugins: [tailwindcss()],
   },
   runtimeConfig: {
-    githubToken: process.env.GITHUB_TOKEN, // private
-    githubOrg: process.env.GITHUB_ORG, // private
+    githubToken: process.env.GITHUB_TOKEN,
+    githubOrg: process.env.GITHUB_ORG,
     public: {
-      githubApiBase: '/api/github',
+      githubApiBase: "/api/github",
     },
   },
 });

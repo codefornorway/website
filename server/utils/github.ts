@@ -1,4 +1,4 @@
-import { Octokit } from '@octokit/rest';
+import { Octokit } from "@octokit/rest";
 
 export function createGithubClient() {
   const { githubToken } = useRuntimeConfig();
@@ -6,7 +6,7 @@ export function createGithubClient() {
   if (!githubToken) {
     throw createError({
       statusCode: 500,
-      statusMessage: 'GitHub API token is missing in runtime config.',
+      statusMessage: "GitHub API token is missing in runtime config.",
     });
   }
 
